@@ -16,9 +16,19 @@ if 'df' not in st.session_state:
 
 
 # Add new use case
+# Initialize error state if not exists
+if 'form_error' not in st.session_state:
+    st.session_state.form_error = ""
+
 with st.form("new_use_case", clear_on_submit=True):
     st.subheader("Add New Use Case")
-    name = st.text_input("Use Case Name")
+    
+    # Display error if exists
+    if st.session_state.form_error:
+        st.error(st.session_state.form_error)
+        st.session_state.form_error = ""
+        
+    name = st.text_input("Use Case Name", help="Required field")
     
     actionability = st.selectbox(
         "Actionability — How ready is your business/team to adopt this AI solution?",
@@ -38,14 +48,18 @@ with st.form("new_use_case", clear_on_submit=True):
     submitted = st.form_submit_button("Add")
 
     if submitted:
-        new_row = {
-            'Name': name,
-            'Actionability': actionability,
-            'Feasibility': feasibility,
-            'Business Value': business_value
-        }
-        st.session_state.df = pd.concat([st.session_state.df, pd.DataFrame([new_row])], ignore_index=True)
-        st.success(f"Added '{name}'")
+        if not name.strip():
+            st.session_state.form_error = "⚠️ Use Case Name is required"
+            st.rerun()
+        else:
+            new_row = {
+                'Name': name,
+                'Actionability': actionability,
+                'Feasibility': feasibility,
+                'Business Value': business_value
+            }
+            st.session_state.df = pd.concat([st.session_state.df, pd.DataFrame([new_row])], ignore_index=True)
+            st.success(f"Added '{name}'")
         
 st.text("📤 Import Saved Data")
 # st.text("You can import a CSV file containing the use cases and their ratings.")
@@ -71,7 +85,8 @@ if not st.session_state.df.empty:
     edited_df = st.data_editor(
         st.session_state.df,
         num_rows="dynamic",
-        use_container_width=True
+        use_container_width=True,
+        disabled=("Actionability", "Feasibility", "Business Value")
     )
     st.session_state.df = edited_df
     
