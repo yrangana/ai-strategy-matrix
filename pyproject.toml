@@ -10,8 +10,11 @@ readme = "README.md"
 requires-python = ">=3.12"
 license = {text = "MIT"}
 authors = [
-    {name = "AI Strategy Team"}
+    {name = "Yash"}
 ]
+homepage = "https://ai-strategy-matrix.streamlit.app"
+repository = "https://github.com/yrangana/ai-strategy-matrix"
+keywords = ["ai", "strategy", "matrix", "prioritization", "streamlit", "visualization"]
 dependencies = [
     "streamlit==1.46.0",
     "plotly==6.1.2",

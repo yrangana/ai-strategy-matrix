@@ -113,13 +113,13 @@ uv run -- pylint *.py tests/*.py # Lint code
 
 ```
 .
-├── main.py               # Main Streamlit application
-├── tests/               # Test directory
-│   ├── __init__.py      # Makes tests directory a package
-│   ├── test_main.py     # Tests for main functionality
-│   └── test_utils.py    # Tests for utility functions
-├── pyproject.toml       # Project configuration and dependencies
-├── requirements.txt     # Pinned dependencies
+├── main.py             # Main Streamlit application
+├── tests/              # Test directory
+│   ├── __init__.py     # Makes tests directory a package
+│   ├── test_main.py    # Tests for main functionality
+│   └── test_utils.py   # Tests for utility functions
+├── pyproject.toml      # Project configuration and dependencies
+├── requirements.txt    # Pinned dependencies
 ├── Makefile            # Development workflow commands
 └── README.md           # This file
 ```
