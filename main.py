@@ -240,4 +240,4 @@ if st.button("🔄 Reset All Data"):
 
 # Add footer with attribution
 st.markdown("---")
-st.caption("© 2025 Created by Yash | MIT License")
+st.caption("© 2025 Created by [Yash](https://github.com/yrangana) | MIT License")
