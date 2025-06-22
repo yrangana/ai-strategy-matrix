@@ -1,3 +1,7 @@
+# AI Strategy Matrix Builder
+# Created by Yash
+# MIT License
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -233,3 +237,7 @@ if st.button("🔄 Reset All Data"):
         columns=["Name", "Actionability", "Feasibility", "Business Value"]
     )
     st.rerun()
+
+# Add footer with attribution
+st.markdown("---")
+st.caption("© 2025 Created by Yash | MIT License")
