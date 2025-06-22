@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-strategy-matrix"
+version = "0.1.0"
+description = "AI Strategy Matrix Builder for prioritizing AI initiatives"
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "MIT"}
+authors = [
+    {name = "AI Strategy Team"}
+]
+dependencies = [
+    "streamlit==1.46.0",
+    "plotly==6.1.2",
+    "watchdog==6.0.0",
+    "pandas",
+    "numpy"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pylint==3.3.7",
+    "pytest==8.4.1",
+    "black==25.1.0",
+    "pytest-cov",
+    "autopep8"
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+include = '\.pyi?$'
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+
+[tool.pylint.messages_control]
+disable = [
+    "C0111", # missing-docstring
+    "C0103", # invalid-name
+    "C0303", # trailing-whitespace
+    "R1735", # use-dict-literal
+]
+
+[tool.pylint.format]
+max-line-length = 100

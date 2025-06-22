@@ -30,6 +30,54 @@ Each dimension is rated as High, Medium, or Low.
 ### Prerequisites
 
 - Python 3.12+
+- uv (fast Python package installer)
+
+### Development Setup
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/yrangana/ai-strategy-matrix.git
+cd ai-strategy-matrix
+```
+
+2. Install dependencies
+
+```bash
+make setup-dev  # Install all dependencies including development tools
+```
+
+Or for production only:
+
+```bash
+make setup  # Install only production dependencies
+```
+
+### Development Workflow
+
+You can use the Makefile commands directly, as they handle dependencies automatically:
+
+- **Run the application**: `make run`
+- **Format code**: `make format` (uses Black)
+- **Run tests**: `make test`
+- **Run tests with coverage**: `make coverage`
+- **Lint code**: `make lint`
+
+Note: All development commands (lint, format, test) will automatically install required dev dependencies if needed.
+
+Alternatively, you can use `uv` directly to run commands in the virtual environment without activation:
+
+```bash
+uv run -- streamlit run main.py  # Run the application
+uv run -- pytest tests/          # Run tests
+uv run -- black *.py tests/*.py  # Format code
+uv run -- pylint *.py tests/*.py # Lint code
+```
+
+### Manage dependencies:
+
+- **Synchronize dependencies**: `uv sync` (updates dependencies to match pyproject.toml)
+- **Add new dependencies**: Update `pyproject.toml` and run `uv sync`
 
 ## Usage
 
@@ -38,6 +86,35 @@ Each dimension is rated as High, Medium, or Low.
 3. **Edit Existing Data**: Modify your entries directly in the data table
 4. **Export Your Work**: Download your data as a CSV file for future use
 5. **Import Previous Work**: Upload a previously saved CSV file
+
+## Project Structure
+
+```
+.
+├── main.py               # Main Streamlit application
+├── tests/               # Test directory
+│   ├── __init__.py      # Makes tests directory a package
+│   ├── test_main.py     # Tests for main functionality
+│   └── test_utils.py    # Tests for utility functions
+├── pyproject.toml       # Project configuration and dependencies
+├── requirements.txt     # Pinned dependencies
+├── Makefile            # Development workflow commands
+└── README.md           # This file
+```
+
+## Testing
+
+This project uses pytest for testing. Run the tests with:
+
+```bash
+make test
+```
+
+Or with coverage information:
+
+```bash
+make coverage
+```
 
 ## Example Use Cases
 

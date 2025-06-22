@@ -1,3 +1,6 @@
 streamlit==1.46.0
 plotly==6.1.2
 watchdog==6.0.0
+pylint==3.3.7
+pytest==8.4.1
+black==25.1.0
