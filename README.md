@@ -1,5 +1,7 @@
 # 🚀 AI Strategy Matrix Builder
 
+[![Code Tests](https://github.com/yrangana/ai-strategy-matrix/actions/workflows/python-tests.yml/badge.svg)](https://github.com/yrangana/ai-strategy-matrix/actions/workflows/python-tests.yml)
+
 A Streamlit application for creating and visualizing AI strategy matrices to prioritize AI use cases based on actionability, feasibility, and business value.
 
 > This project is based on the prioritization framework described in Google Cloud's article ["How to build an effective AI strategy"](https://cloud.google.com/transform/how-to-build-an-effective-ai-strategy), which recommends evaluating AI use cases based on business value, actionability, and feasibility.
