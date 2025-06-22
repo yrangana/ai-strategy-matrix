@@ -147,7 +147,7 @@ if not st.session_state.df.empty:
         size="BusinessValue_num",
         size_max=60,
         text="Name",
-        color="BusinessValue_num",
+        color="BusinessValue_num",  # Use numeric values for continuous color scale
         hover_name="Name",
         custom_data=["Feasibility", "Actionability", "Business Value"],
         color_continuous_scale=["#AEDFF7", "#007BFF"],
@@ -217,7 +217,12 @@ if not st.session_state.df.empty:
             tickvals=[1, 2, 3],
             ticktext=["Low", "Medium", "High"],
         ),
-        coloraxis_colorbar=dict(title="Business Value"),
+        coloraxis_colorbar=dict(
+            title="Business Value",
+            tickvals=[1, 2, 3],
+            ticktext=["Low", "Medium", "High"],
+        ),
+        height=900,  # Increase the height for better visualization
     )
 
     st.plotly_chart(fig, use_container_width=True)

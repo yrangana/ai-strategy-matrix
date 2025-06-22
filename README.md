@@ -97,6 +97,14 @@ uv run -- pylint *.py tests/*.py # Lint code
 4. **Export Your Work**: Download your data as a CSV file for future use
 5. **Import Previous Work**: Upload a previously saved CSV file
 
+### Screenshots
+
+#### AI Strategy Matrix Visualization
+![AI Strategy Matrix](img/AI%20Strategy%20Matrix.png)
+
+#### Data Management Interface
+![Add, Import, Export, Delete Use Cases](img/Add,%20Import,%20Export,%20Delete%20Use%20Cases.png)
+
 ## Project Structure
 
 ```
