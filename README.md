@@ -2,9 +2,19 @@
 
 A Streamlit application for creating and visualizing AI strategy matrices to prioritize AI use cases based on actionability, feasibility, and business value.
 
+> This project is based on the prioritization framework described in Google Cloud's article ["How to build an effective AI strategy"](https://cloud.google.com/transform/how-to-build-an-effective-ai-strategy), which recommends evaluating AI use cases based on business value, actionability, and feasibility.
+
 ## Overview
 
 The AI Strategy Matrix Builder helps organizations make data-driven decisions about which AI initiatives to pursue. By evaluating potential AI use cases across three key dimensions, this tool creates a visual matrix that clearly identifies which projects should be prioritized.
+
+According to Google Cloud's research, organizations with a comprehensive AI strategy see ROI from generative AI much faster. A key part of this strategy is prioritizing the right use cases using a matrix that evaluates initiatives based on:
+
+- **Business Value**: Impact on customer/employee needs, alignment with business objectives
+- **Actionability**: Ease of adoption, speed of implementation, usability
+- **Feasibility**: Technical fit, data readiness, risk tolerance
+
+This application implements this prioritization framework as an interactive tool.
 
 ## Key Features
 
