@@ -164,6 +164,88 @@ if not st.session_state.df.empty:
         + "Actionability: %{customdata[1]}<br>"
         + "Business Value: %{customdata[2]}<br>"
     )
+    
+    # Improve text display with wrapping and better visibility
+    # Don't set textposition here as we'll handle it individually for each point
+    
+    # Add text wrapping for better readability and prevent overlap
+    # Create a list of wrapped text labels and assign different positions to prevent overlap
+    wrapped_labels = []
+    text_positions = []
+    
+    # First, wrap the text labels
+    for name in plot_df["Name"]:
+        # Split long names into multiple lines (max 15 chars per line)
+        if len(name) > 15:
+            words = name.split()
+            lines = []
+            current_line = ""
+            
+            for word in words:
+                if len(current_line + " " + word) > 15 and current_line:
+                    lines.append(current_line)
+                    current_line = word
+                else:
+                    if current_line:
+                        current_line += " " + word
+                    else:
+                        current_line = word
+            
+            if current_line:  # Add the last line
+                lines.append(current_line)
+                
+            wrapped_labels.append("<br>".join(lines))
+        else:
+            wrapped_labels.append(name)
+    
+    # Create a grid-based positioning system to prevent overlap
+    # Define possible text positions
+    positions = [
+        "top center", "top right", "top left",
+        "bottom center", "bottom right", "bottom left",
+        "middle right", "middle left"
+    ]
+    
+    # Group points that are close to each other
+    # This is a simplified approach - we'll use a grid-based system
+    grid_size = 0.5  # Size of each grid cell
+    grid = {}  # Dictionary to store points in each grid cell
+    
+    for i, row in plot_df.iterrows():
+        # Calculate grid position
+        grid_x = int(row["Feasibility_jitter"] / grid_size)
+        grid_y = int(row["Actionability_jitter"] / grid_size)
+        grid_key = (grid_x, grid_y)
+        
+        # Add point to grid
+        if grid_key not in grid:
+            grid[grid_key] = []
+        grid[grid_key].append(i)
+    
+    # Assign positions to avoid overlap
+    for grid_key, indices in grid.items():
+        if len(indices) == 1:
+            # If only one point in this grid cell, use default position
+            text_positions.append("top center")
+        else:
+            # If multiple points in this grid cell, distribute positions
+            for idx, point_idx in enumerate(indices):
+                position_idx = idx % len(positions)
+                if point_idx < len(text_positions):
+                    text_positions[point_idx] = positions[position_idx]
+                else:
+                    text_positions.append(positions[position_idx])
+    
+    # Ensure we have a position for each point
+    while len(text_positions) < len(plot_df):
+        text_positions.append("top center")
+    
+    # Update the text with wrapped labels and positions
+    fig.update_traces(
+        text=wrapped_labels,
+        textposition=text_positions,
+        textfont=dict(size=11, color="black", family="Arial, sans-serif", weight="bold"),
+    )
 
     # Add quadrant shapes with different colors
     # Q1: High Feasibility, High Actionability (Top Right) - Priority
@@ -227,6 +309,15 @@ if not st.session_state.df.empty:
             ticktext=["Low", "Medium", "High"],
         ),
         height=900,  # Increase the height for better visualization
+        hoverlabel=dict(
+            bgcolor="white",
+            font_size=12,
+            font_family="Arial",
+            bordercolor="#DFE2E6",
+            namelength=-1  # Show the full label name
+        ),
+        # Add some margin to ensure text labels have room
+        margin=dict(l=50, r=50, t=50, b=50),
     )
 
     st.plotly_chart(fig, use_container_width=True)
